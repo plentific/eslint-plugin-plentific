@@ -31,7 +31,7 @@ module.exports = {
           Property(node) {
             const { key, value } = node
             if(
-              /example/.test(context.getFilename()) &&
+              /managers/.test(context.getFilename()) &&
               key.name === 'path' && 
               value.value.endsWith('/')
             )  {
