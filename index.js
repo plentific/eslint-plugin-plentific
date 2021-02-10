@@ -37,7 +37,7 @@ module.exports = {
             )  {
               context.report({
                 node, 
-                message: 'Traling slashes are not desired anymore please contact b/e developer to fix issue.'
+                message: 'Trailing slashes are not desired anymore please contact b/e developer to fix issue.'
               })
             }
           }
