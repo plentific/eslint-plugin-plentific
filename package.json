@@ -1,0 +1,16 @@
+{
+  "name": "eslint-plugin-plentific",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "https://github.com/plentific/",
+  "license": "UNLICENSED",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.19.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-report-trailing-slash": "file:."
+  }
+}
