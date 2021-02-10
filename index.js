@@ -33,7 +33,7 @@ module.exports = {
             if(
               /managers/.test(context.getFilename()) &&
               key.name === 'path' && 
-              value.value.endsWith('/')
+              value.value && value.value.endsWith('/')
             )  {
               context.report({
                 node, 
@@ -41,20 +41,6 @@ module.exports = {
               })
             }
           }
-        }
-      }
-    },
-    'no-trans-component': {
-      create: function (context) {
-        return {
-          JSXIdentifier(node) {
-            if (node.name === 'Trans') {
-              context.report({
-                node, 
-                message: 'Trans component is not supported anymore, please use t`` syntax'
-              })
-            }
-          },
         }
       }
     }

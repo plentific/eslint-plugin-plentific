@@ -11,6 +11,6 @@
   "devDependencies": {
     "eslint": "^7.19.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-report-trailing-slash": "file:."
+    "eslint-plugin-plentific": "file:."
   }
 }
