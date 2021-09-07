@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "lib": ["dom", "es2015", "es2016"],
+    "jsx": "preserve",
+    "target": "es2020",
+    "module": "es2020",
+    "moduleResolution": "node",
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "outDir": "tscBuild",
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "paths": {
+      "modules/*": ["examples/app/modules/*"],
+      "src/*": ["examples/app/scripts/*"],
+      "shared/*": ["examples/app/shared/scripts/*"]
+    },
+    "typeRoots": ["./types", "node_modules/@types"]
+  },
+  "exclude": ["node_modules", "types"]
+}
