@@ -9,7 +9,7 @@ function isRequire(node) {
 
 function getModuleName (filename) {
   const match = /modules\/(?<module>[^/]*)/.exec(filename)
-  if(match && match.groups && match.groups.module)  {
+  if (match && match.groups && match.groups.module)  {
     return match.groups.module
   }
 }
@@ -18,14 +18,14 @@ var visibilityMap = null
 
 function flattenNode(node, visitedMap = {}, path = []) {
   path.push(node.module)
-  if(node.module in visitedMap) {
+  if (node.module in visitedMap) {
     throw Error('Module cycle detected:', path.join(' -> '))
   }
   visitedMap[node.module] = true
   var visible = {}
-  for(const subNode of node.children) {
+  for (const subNode of node.children) {
     visible[subNode.module] = true
-    if(!subNode.visible) {
+    if (!subNode.visible) {
       flattenNode(subNode, {
         ...visitedMap
       }, [...path])
@@ -42,14 +42,14 @@ const ALL_MODULES_KEY = '<all-modules>'
 
 function flattenDependencyMap(dependencyMap, ) {
   const allModulesNode = dependencyMap[ALL_MODULES_KEY]
-  if(allModulesNode) {
+  if (allModulesNode) {
     delete dependencyMap[ALL_MODULES_KEY]
-    for(const module in dependencyMap) {
+    for (const module in dependencyMap) {
       const node = dependencyMap[module]
       node.children.push(...allModulesNode.children.filter(child => child.module !== module))
     }
   }
-  for(const module in dependencyMap) {
+  for (const module in dependencyMap) {
     const node = dependencyMap[module]
     flattenNode(node)
   }
@@ -60,7 +60,7 @@ function computeVisibilityMap(config) {
 
   function getOrCreateNode(module) {
     let node = dependencyMap[module]
-    if(!node) {
+    if (!node) {
       node = {
         module,
         children: []
@@ -85,11 +85,11 @@ function computeVisibilityMap(config) {
       }
   }).filter(value => value)
 
-  for(const [ module, importModule ] of tupples) {
+  for (const [ module, importModule ] of tupples) {
     const moduleNode = getOrCreateNode(module)
     const importModuleNode = getOrCreateNode(importModule)
 
-    if(!moduleNode.children.includes(importModule)) {
+    if (!moduleNode.children.includes(importModule)) {
       moduleNode.children.push(importModuleNode)
     }
   }
@@ -108,12 +108,12 @@ function checkForCyclicImport (context, node, filename, importPath) {
   const module = getModuleName(filename)
   const importModule = getModuleName(importPath)
 
-  if(!module || !importModule) {
+  if (!module || !importModule) {
     return
   }
 
   const visibilityNode = visibilityMap[module]
-  if(!visibilityNode || !visibilityNode[importModule]) {
+  if (!visibilityNode || !visibilityNode[importModule]) {
     return context.report({
       node,
       message: `module '${module}' doesn't see module '${importModule}'`,
@@ -124,13 +124,12 @@ function checkForCyclicImport (context, node, filename, importPath) {
 module.exports = {
   create: function (context) {
     const options = context.options[0]
-    if(!options || !options.config) {
+    if (!options || !options.config) {
       throw Error('missing cofiguration')
     }
 
-    if(!visibilityMap) {
+    if (!visibilityMap) {
       visibilityMap = computeVisibilityMap(options.config)
-      console.log('computing')
     }
     return {
       ImportDeclaration(node) {
