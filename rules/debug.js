@@ -1,7 +1,7 @@
 module.exports = {
   create: function (context) {
     return {
-      // NOTE: just for debugging 
+      // NOTE: just for debugging
       Program(node) {
         // const getCircularReplacer = () => {
         //   const seen = new WeakSet();

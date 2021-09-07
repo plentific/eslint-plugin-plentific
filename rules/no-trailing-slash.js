@@ -5,11 +5,11 @@ module.exports = {
         const { key, value } = node
         if(
           /managers/.test(context.getFilename()) &&
-          key.name === 'path' && 
+          key.name === 'path' &&
           value.value && value.value.endsWith('/')
         )  {
           context.report({
-            node, 
+            node,
             message: 'Trailing slashes are not desired anymore please contact b/e developer to fix issue.'
           })
         }

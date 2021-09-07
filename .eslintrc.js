@@ -32,7 +32,7 @@ module.exports = {
       quotes: [ 2, 'single' ]
     }
   }, {
-    files: ['examples/**/*.ts{x,}'], 
+    files: ['examples/**/*.ts{x,}'],
     parser: '@typescript-eslint/parser',
     parserOptions: {
       ecmaFeatures: {
@@ -42,5 +42,5 @@ module.exports = {
       sourceType: 'module',
       project: './tsconfig.json',
     },
-  }] 
+  }]
 }

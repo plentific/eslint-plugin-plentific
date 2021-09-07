@@ -3,7 +3,7 @@ function isRequire(node) {
     node.callee &&
     node.callee.type === 'Identifier' &&
     node.callee.name === 'require' &&
-    node.arguments.length >= 1 && 
+    node.arguments.length >= 1 &&
     node.arguments[0].type === 'Literal'
 }
 
@@ -30,9 +30,9 @@ function flattenNode(node, visitedMap = {}, path = []) {
         ...visitedMap
       }, [...path])
     }
-  
+
     visible = {
-      ...visible, 
+      ...visible,
       ...subNode.visible
     }
   }
@@ -46,23 +46,23 @@ function flattenDependencyMap(dependencyMap, ) {
     delete dependencyMap[ALL_MODULES_KEY]
     for(const module in dependencyMap) {
       const node = dependencyMap[module]
-      node.children.push(...allModulesNode.children.filter(child => child.module !== module))  
-    }  
+      node.children.push(...allModulesNode.children.filter(child => child.module !== module))
+    }
   }
   for(const module in dependencyMap) {
     const node = dependencyMap[module]
     flattenNode(node)
   }
 }
- 
+
 function computeVisibilityMap(config) {
   const dependencyMap = {}
-  
+
   function getOrCreateNode(module) {
     let node = dependencyMap[module]
     if(!node) {
       node = {
-        module, 
+        module,
         children: []
       }
       dependencyMap[module] = node
@@ -84,7 +84,7 @@ function computeVisibilityMap(config) {
         return tupple
       }
   }).filter(value => value)
-  
+
   for(const [ module, importModule ] of tupples) {
     const moduleNode = getOrCreateNode(module)
     const importModuleNode = getOrCreateNode(importModule)
@@ -94,7 +94,7 @@ function computeVisibilityMap(config) {
     }
   }
 
-  flattenDependencyMap(dependencyMap)  
+  flattenDependencyMap(dependencyMap)
 
   const visibilityMap = Object.keys(dependencyMap).reduce((visibilityMap, module) => {
     visibilityMap[module] = dependencyMap[module].visible
@@ -107,7 +107,7 @@ function computeVisibilityMap(config) {
 function checkForCyclicImport (context, node, filename, importPath) {
   const module = getModuleName(filename)
   const importModule = getModuleName(importPath)
-  
+
   if(!module || !importModule) {
     return
   }

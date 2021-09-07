@@ -5,9 +5,9 @@ export var a = {
 
 export var b = {
   // eslint-disable-next-line plentific/no-trailing-slash
-  path: '/path/',  // should be error 
+  path: '/path/',  // should be error
 }
 
 export var c = {
-  path: '/path'   // OK 
+  path: '/path'   // OK
 }
