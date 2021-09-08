@@ -137,8 +137,8 @@ module.exports = {
         return checkForCyclicImport(context, node, context.getFilename(), importPath)
       },
       CallExpression(node) {
-        const importPath = node.arguments[0].value
         if (isRequire(node)) {
+          const importPath = node.arguments[0].value
           return checkForCyclicImport(context, node, context.getFilename(), importPath)
         }
       }
