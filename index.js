@@ -1,5 +1,3 @@
-console.log(require('./rules/no-trailing-slash'))
-
 module.exports = {
   rules: {
     'debug': require('./rules/debug'),
