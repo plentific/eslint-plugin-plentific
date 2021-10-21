@@ -113,10 +113,12 @@ function checkForCyclicImport (context, node, filename, importPath) {
   }
 
   const visibilityNode = visibilityMap[module]
-  if (!visibilityNode || !visibilityNode[importModule]) {
+  const importedInsideSameModule = module === importModule;
+
+  if (!importedInsideSameModule & (!visibilityNode || !visibilityNode[importModule])) {
     return context.report({
       node,
-      message: `module '${module}' doesn't see module '${importModule}'`,
+      message: `Module '${importModule}' is not configured as depedency of '${module}'`,
     });
   }
 }
