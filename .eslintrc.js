@@ -1,6 +1,7 @@
 const noCyclicModulesImportsConfig = `
 [<all-modules>] --> [a]
 [c] --> [b]
+[d]
 `
 
 module.exports = {

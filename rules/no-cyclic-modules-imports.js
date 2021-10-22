@@ -15,7 +15,6 @@ function getModuleName (filename) {
 }
 
 var visibilityMap = null
-var allModulesNode = null;
 
 function flattenNode(node, visitedMap = {}, path = []) {
   path.push(node.module)
@@ -41,8 +40,9 @@ function flattenNode(node, visitedMap = {}, path = []) {
 }
 const ALL_MODULES_KEY = '<all-modules>'
 
-function flattenDependencyMap(dependencyMap, ) {
-  allModulesNode = dependencyMap[ALL_MODULES_KEY]
+function flattenDependencyMap(dependencyMap) {
+  const allModulesNode = dependencyMap[ALL_MODULES_KEY]
+
   if (allModulesNode) {
     delete dependencyMap[ALL_MODULES_KEY]
     for (const module in dependencyMap) {
@@ -50,6 +50,7 @@ function flattenDependencyMap(dependencyMap, ) {
       node.children.push(...allModulesNode.children.filter(child => child.module !== module))
     }
   }
+
   for (const module in dependencyMap) {
     const node = dependencyMap[module]
     flattenNode(node)
@@ -76,18 +77,21 @@ function computeVisibilityMap(config) {
     .map(value => value.trim())
     .filter(value => value)
 
-  const tupples = pairs.map(pair => {
-    const tupple = pair
+  const linkedModuleList = pairs.map(pair => {
+    return pair
       .split('-->')
       .map(value => value.replace(/[\[\]]/g, '').trim())
       .filter(value => value)
-      if (tupple.length === 2) {
-        return tupple
-      }
   }).filter(value => value)
 
-  for (const [ module, importModule ] of tupples) {
+
+  for (const [ module, importModule ] of linkedModuleList) {
     const moduleNode = getOrCreateNode(module)
+
+    if(!importModule) {
+      continue;
+    }
+
     const importModuleNode = getOrCreateNode(importModule)
 
     if (!moduleNode.children.includes(importModule)) {
@@ -115,9 +119,8 @@ function checkForCyclicImport (context, node, filename, importPath) {
 
   const visibilityNode = visibilityMap[module]
   const importedInsideSameModule = module === importModule;
-  const isCommonModuleImported = allModulesNode.children.find(child => child.module === importModule);
 
-  if (importedInsideSameModule || isCommonModuleImported) {
+  if (importedInsideSameModule) {
     return;
   }
 
