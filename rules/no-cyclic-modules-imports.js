@@ -40,8 +40,9 @@ function flattenNode(node, visitedMap = {}, path = []) {
 }
 const ALL_MODULES_KEY = '<all-modules>'
 
-function flattenDependencyMap(dependencyMap, ) {
+function flattenDependencyMap(dependencyMap) {
   const allModulesNode = dependencyMap[ALL_MODULES_KEY]
+
   if (allModulesNode) {
     delete dependencyMap[ALL_MODULES_KEY]
     for (const module in dependencyMap) {
@@ -49,6 +50,7 @@ function flattenDependencyMap(dependencyMap, ) {
       node.children.push(...allModulesNode.children.filter(child => child.module !== module))
     }
   }
+
   for (const module in dependencyMap) {
     const node = dependencyMap[module]
     flattenNode(node)
@@ -75,18 +77,25 @@ function computeVisibilityMap(config) {
     .map(value => value.trim())
     .filter(value => value)
 
-  const tupples = pairs.map(pair => {
-    const tupple = pair
+  const linkedModuleList = pairs.map(pair => {
+    const linkedModule = pair
       .split('-->')
       .map(value => value.replace(/[\[\]]/g, '').trim())
       .filter(value => value)
-      if (tupple.length === 2) {
-        return tupple
-      }
-  }).filter(value => value)
 
-  for (const [ module, importModule ] of tupples) {
+    if (linkedModule.length >= 1 && linkedModule.length <= 2) {
+      return linkedModule;
+    }
+  }).filter(Boolean)
+
+
+  for (const [ module, importModule ] of linkedModuleList) {
     const moduleNode = getOrCreateNode(module)
+
+    if(!importModule) {
+      continue;
+    }
+
     const importModuleNode = getOrCreateNode(importModule)
 
     if (!moduleNode.children.includes(importModule)) {
@@ -115,10 +124,14 @@ function checkForCyclicImport (context, node, filename, importPath) {
   const visibilityNode = visibilityMap[module]
   const importedInsideSameModule = module === importModule;
 
-  if (!importedInsideSameModule & (!visibilityNode || !visibilityNode[importModule])) {
+  if (importedInsideSameModule) {
+    return;
+  }
+
+  if (!visibilityNode || !visibilityNode[importModule]) {
     return context.report({
       node,
-      message: `Module '${importModule}' is not configured as depedency of '${module}'`,
+      message: `Module '${importModule}' is not configured as dependency of '${module}'`,
     });
   }
 }
