@@ -15,6 +15,7 @@ function getModuleName (filename) {
 }
 
 var visibilityMap = null
+var allModulesNode = null;
 
 function flattenNode(node, visitedMap = {}, path = []) {
   path.push(node.module)
@@ -114,11 +115,16 @@ function checkForCyclicImport (context, node, filename, importPath) {
 
   const visibilityNode = visibilityMap[module]
   const importedInsideSameModule = module === importModule;
+  const isCommonModuleImported = allModulesNode.children.find(child => child.module === importModule);
 
-  if (!importedInsideSameModule & (!visibilityNode || !visibilityNode[importModule])) {
+  if (importedInsideSameModule || isCommonModuleImported) {
+    return;
+  }
+
+  if (!visibilityNode || !visibilityNode[importModule]) {
     return context.report({
       node,
-      message: `Module '${importModule}' is not configured as depedency of '${module}'`,
+      message: `Module '${importModule}' is not configured as dependency of '${module}'`,
     });
   }
 }
