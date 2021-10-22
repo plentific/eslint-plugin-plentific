@@ -78,11 +78,15 @@ function computeVisibilityMap(config) {
     .filter(value => value)
 
   const linkedModuleList = pairs.map(pair => {
-    return pair
+    const linkedModule = pair
       .split('-->')
       .map(value => value.replace(/[\[\]]/g, '').trim())
       .filter(value => value)
-  }).filter(value => value)
+
+    if (linkedModule.length >= 1 && linkedModule.length <= 2) {
+      return linkedModule;
+    }
+  }).filter(Boolean)
 
 
   for (const [ module, importModule ] of linkedModuleList) {
