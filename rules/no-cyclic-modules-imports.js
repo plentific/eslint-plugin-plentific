@@ -42,7 +42,7 @@ function flattenNode(node, visitedMap = {}, path = []) {
 const ALL_MODULES_KEY = '<all-modules>'
 
 function flattenDependencyMap(dependencyMap, ) {
-  const allModulesNode = dependencyMap[ALL_MODULES_KEY]
+  allModulesNode = dependencyMap[ALL_MODULES_KEY]
   if (allModulesNode) {
     delete dependencyMap[ALL_MODULES_KEY]
     for (const module in dependencyMap) {
