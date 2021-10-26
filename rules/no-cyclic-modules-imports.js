@@ -57,7 +57,7 @@ function flattenDependencyMap(dependencyMap) {
   }
 }
 
-export function computeVisibilityMap(config) {
+function computeVisibilityMap(config) {
   const dependencyMap = {}
 
   function getOrCreateNode(module) {
