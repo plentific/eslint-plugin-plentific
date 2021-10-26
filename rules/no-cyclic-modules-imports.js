@@ -137,6 +137,8 @@ function checkForCyclicImport (context, node, filename, importPath) {
 }
 
 module.exports = {
+  getModuleName,
+  computeVisibilityMap,
   create: function (context) {
     const options = context.options[0]
     if (!options || !options.config) {
