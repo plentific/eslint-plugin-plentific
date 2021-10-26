@@ -57,7 +57,7 @@ function flattenDependencyMap(dependencyMap) {
   }
 }
 
-function computeVisibilityMap(config) {
+export function computeVisibilityMap(config) {
   const dependencyMap = {}
 
   function getOrCreateNode(module) {
@@ -113,7 +113,7 @@ function computeVisibilityMap(config) {
   return visibilityMap
 }
 
-export function checkForCyclicImport (context, node, filename, importPath) {
+function checkForCyclicImport (context, node, filename, importPath) {
   const module = getModuleName(filename)
   const importModule = getModuleName(importPath)
 
@@ -137,6 +137,8 @@ export function checkForCyclicImport (context, node, filename, importPath) {
 }
 
 module.exports = {
+  getModuleName,
+  computeVisibilityMap,
   create: function (context) {
     const options = context.options[0]
     if (!options || !options.config) {
