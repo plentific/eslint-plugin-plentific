@@ -113,7 +113,7 @@ function computeVisibilityMap(config) {
   return visibilityMap
 }
 
-function checkForCyclicImport (context, node, filename, importPath) {
+export function checkForCyclicImport (context, node, filename, importPath) {
   const module = getModuleName(filename)
   const importModule = getModuleName(importPath)
 
