@@ -19,7 +19,7 @@ var visibilityMap = null
 function flattenNode(node, visitedMap = {}, path = []) {
   path.push(node.module)
   if (node.module in visitedMap) {
-    throw Error('Module cycle detected:', path.join(' -> '))
+    throw Error(`Module cycle detected: ${path.join(' -> ')}`)
   }
   visitedMap[node.module] = true
   var visible = {}
