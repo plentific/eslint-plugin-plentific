@@ -17,6 +17,7 @@ module.exports = {
     'plentific/no-trailing-slash': 'error',
     'plentific/no-window-location-replace': 'error',
     'plentific/no-cyclic-modules-imports': ['error', { config: noCyclicModulesImportsConfig }],
+    'plentific/faker-import': 'error',
     'eslint-comments/no-unused-disable': 'error',
     'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
   },
