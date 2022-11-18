@@ -4,7 +4,7 @@ const noCyclicModulesImportsConfig = `
 [d]
 [e]
 [g] --> [f]
-`;
+`
 
 module.exports = {
   extends: [
