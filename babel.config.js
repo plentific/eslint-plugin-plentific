@@ -1,6 +1,6 @@
 const config = {
   presets: [
-    '@babel/preset-env',
+    '@babel/preset-env'
   ],
 
   plugins: [
@@ -10,6 +10,7 @@ const config = {
         src: './examples/app/scripts',
         shared: './examples/app/shared/scripts',
         modules: './examples/app/modules',
+        libs: './examples/libs',
       },
     }],
   ],

@@ -9,8 +9,13 @@ function isRequire(node) {
 
 function getModuleName (filename) {
   const match = /modules\/(?<module>[^/]*)/.exec(filename)
+  const matchNx = /libs\/(?<module>[^/]*)/.exec(filename)
+               
   if (match && match.groups && match.groups.module)  {
     return match.groups.module
+  }     
+  if (matchNx && matchNx.groups && matchNx.groups.module) {
+    return matchNx.groups.module
   }
 }
 

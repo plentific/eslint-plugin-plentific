@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-plentific",
-  "version": "1.4.0",
+  "version": "1.6.0",
   "main": "index.js",
   "author": "https://github.com/plentific/",
   "license": "UNLICENSED",
