@@ -1,5 +1,7 @@
 const config = {
-  presets: ['@babel/preset-env'],
+  presets: [
+    '@babel/preset-env'
+  ],
 
   plugins: [
     ['module-resolver', {
@@ -8,6 +10,7 @@ const config = {
         src: './examples/app/scripts',
         shared: './examples/app/shared/scripts',
         modules: './examples/app/modules',
+        libs: './examples/libs',
       },
     }],
   ],
@@ -15,4 +18,4 @@ const config = {
   exclude: '/node_modules/',
 }
 
-module.exports = config;
+module.exports = config
