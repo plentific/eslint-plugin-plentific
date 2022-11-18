@@ -19,6 +19,7 @@
     "baseUrl": "./",
     "paths": {
       "modules/*": ["examples/app/modules/*"],
+      "libs/*": ["examples/libs/*"],
       "src/*": ["examples/app/scripts/*"],
       "shared/*": ["examples/app/shared/scripts/*"]
     },
