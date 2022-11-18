@@ -147,7 +147,7 @@ module.exports = {
   create: function (context) {
     const options = context.options[0]
     if (!options || !options.config) {
-      throw Error('missing cofiguration')
+      throw Error('missing configuration')
     }
 
     if (!visibilityMap) {
