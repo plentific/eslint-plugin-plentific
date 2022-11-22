@@ -15,12 +15,13 @@ module.exports = {
   ],
 
   rules: {
+    'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
+    'eslint-comments/no-unused-disable': 'error',
     'plentific/debug': 'error',
+    'plentific/no-cyclic-modules-imports': ['error', { config: noCyclicModulesImportsConfig }],
+    'plentific/no-parallel-async': 'error',
     'plentific/no-trailing-slash': 'error',
     'plentific/no-window-location-replace': 'error',
-    'plentific/no-cyclic-modules-imports': ['error', { config: noCyclicModulesImportsConfig }],
-    'eslint-comments/no-unused-disable': 'error',
-    'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
   },
 
   overrides: [{
@@ -33,7 +34,7 @@ module.exports = {
       },
     },
     rules: {
-      quotes: [ 2, 'single' ]
+      quotes: [2, 'single']
     }
   }, {
     files: ['examples/**/*.ts{x,}'],
