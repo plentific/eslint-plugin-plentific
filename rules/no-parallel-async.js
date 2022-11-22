@@ -11,7 +11,7 @@ module.exports = {
   },
   create(context) {
     return {
-      'Program'() {
+      'Program:exit'() {
         const tracker = new ReferenceTracker(context.getScope())
         for (const { node } of tracker.iterateGlobalReferences({
           Promise: {
