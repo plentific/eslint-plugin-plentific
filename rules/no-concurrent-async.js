@@ -22,7 +22,7 @@ module.exports = {
         })) {
           context.report({
             node,
-            message: "Parallel async execution using `Promise.all` is not allowed. Please use `for await...of` to ensure order of interactions.",
+            message: "Concurrent async execution using `Promise.all` is not allowed. Please use `for await...of` to ensure order of interactions.",
           })
         }
       },
