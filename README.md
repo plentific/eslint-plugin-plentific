@@ -15,7 +15,7 @@ In `eslint-plugin-plentific` repository, run:
 ```
 yarn link
 ```
-Output should look: 
+Output should look like this:
 ```
 yarn link vx.x.x
 success Registered "eslint-plugin-plentific".
