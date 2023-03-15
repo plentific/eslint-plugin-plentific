@@ -34,7 +34,7 @@ yarn link vx.x.x
 success Using linked package for "eslint-plugin-plentific".
 ```
 
-To reverse this process, simply use `yarn unlink` or `eslint-plugin-plentific` depending on the repository.
+To reverse this process, simply use `yarn unlink` or `yarn unlink eslint-plugin-plentific` depending on the repository.
 
 ##  Troubleshooting
 
