@@ -28,7 +28,7 @@ In `dashboard` repository, run:
 yarn link eslint-plugin-plentific
 ```
 
-Output should look: 
+Output should look like this:
 ```
 yarn link vx.x.x
 success Using linked package for "eslint-plugin-plentific".
