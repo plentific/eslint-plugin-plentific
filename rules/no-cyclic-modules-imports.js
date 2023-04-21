@@ -7,13 +7,15 @@ function isRequire(node) {
     node.arguments[0].type === 'Literal'
 }
 
-function getModuleName (filename) {
+
+
+function getModuleName(filename) {
   const match = /modules\/(?<module>[^/]*)/.exec(filename)
   const matchNx = /libs\/(?<module>[^/]*)/.exec(filename)
-               
-  if (match && match.groups && match.groups.module)  {
+
+  if (match && match.groups && match.groups.module) {
     return match.groups.module
-  }     
+  }
   if (matchNx && matchNx.groups && matchNx.groups.module) {
     return matchNx.groups.module
   }
@@ -94,10 +96,10 @@ function computeVisibilityMap(config) {
   }).filter(Boolean)
 
 
-  for (const [ module, importModule ] of linkedModuleList) {
+  for (const [module, importModule] of linkedModuleList) {
     const moduleNode = getOrCreateNode(module)
 
-    if(!importModule) {
+    if (!importModule) {
       continue;
     }
 
@@ -118,7 +120,7 @@ function computeVisibilityMap(config) {
   return visibilityMap
 }
 
-function checkForCyclicImport (context, node, filename, importPath) {
+function checkForCyclicImport(context, node, filename, importPath) {
   const module = getModuleName(filename)
   const importModule = getModuleName(importPath)
 
@@ -158,6 +160,12 @@ module.exports = {
         const importPath = node.source.value
         return checkForCyclicImport(context, node, context.getFilename(), importPath)
       },
+
+      ImportExpression(node) {
+        const importPath = node.source.value
+        return checkForCyclicImport(context, node, context.getFilename(), importPath)
+      },
+
       CallExpression(node) {
         if (isRequire(node)) {
           const importPath = node.arguments[0].value
