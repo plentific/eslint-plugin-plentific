@@ -1,0 +1,3 @@
+import { ComponentDeprecated } from "examples/app/components/ComponentDeprecated";
+
+export const ExampleView = () => <ComponentDeprecated />;
