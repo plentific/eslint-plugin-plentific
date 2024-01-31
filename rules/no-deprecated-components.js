@@ -7,30 +7,30 @@ module.exports = {
     },
     schema: [
       {
-        type: "array",
-        items: {
+        type: "object",
+        additionalProperties: {
           type: "string",
         },
-        uniqueItems: true,
       },
     ],
     messages: {
       deprecatedComponentImport:
-        'Components and utils under "{{path}}" are considered deprecated, please migrate the usage to the agreed upon replacement.',
+        'Components and utils under "{{path}}" are considered deprecated, please migrate the usage to "{{replacement}}".',
     },
   },
 
   create(context) {
-    const restrictedPaths = new Set(context.options[0] || []);
+    const restrictedPaths = context.options[0] || {};
 
     return {
       ImportDeclaration(node) {
-        if (restrictedPaths.has(node.source.value)) {
+        if (restrictedPaths.hasOwnProperty(node.source.value)) {
           context.report({
             node,
             messageId: "deprecatedComponentImport",
             data: {
               path: node.source.value,
+              replacement: restrictedPaths[node.source.value],
             },
           });
         }

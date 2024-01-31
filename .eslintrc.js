@@ -17,7 +17,10 @@ module.exports = {
     "plentific/no-concurrent-async": "error",
     "plentific/no-deprecated-components": [
       "error",
-      ["examples/app/components/ComponentDeprecated"],
+      {
+        "examples/app/components/ComponentDeprecated":
+          "examples/app/components/Component",
+      },
     ],
     "plentific/no-cyclic-modules-imports": [
       "error",
