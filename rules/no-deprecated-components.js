@@ -15,7 +15,7 @@ module.exports = {
     ],
     messages: {
       deprecatedComponentImport:
-        'Components and utils under "{{path}}" are considered deprecated, please migrate the usage to "{{replacement}}".',
+        'Components and utils under "{{path}}" are considered deprecated, please migrate the usage to "{{replacement}}". If this rule is blocking you and you have to disable it, please include a comment with JIRA ticket and the reason for not doing the migration.',
     },
   },
 
