@@ -1,6 +1,7 @@
 module.exports = {
   rules: {
     debug: require("./rules/debug"),
+    "ata-required-tags": require("./rules/ata-required-tags"),
     "no-concurrent-async": require("./rules/no-concurrent-async"),
     "no-deprecated-components": require("./rules/no-deprecated-components"),
     "no-cyclic-modules-imports": require("./rules/no-cyclic-modules-imports"),

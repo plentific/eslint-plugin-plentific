@@ -28,6 +28,15 @@ module.exports = {
     ],
     "plentific/no-trailing-slash": "error",
     "plentific/no-window-location-replace": "error",
+    "plentific/ata-required-tags": [
+      "error",
+      {
+        matchers: [{
+          pathPattern: '.*/ata/e2e/.*/.*\\.test\\.ts',
+          requiredTags: ['e2e', 'high|highest|medium|low'],
+        }]
+      },
+    ],
   },
 
   overrides: [
