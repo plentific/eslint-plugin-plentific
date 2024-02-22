@@ -1,24 +1,5 @@
-// more info https://eslint.org/docs/latest/developer-guide/working-with-rules
-
-const getCircularReplacer = () => {
-  const seen = new WeakSet();
-  return (key, value) => {
-    if(key === 'parent') {
-      return
-    }
-    if (typeof value === "object" && value !== null) {
-      if (seen.has(value)) {
-        return;
-      }
-      seen.add(value)
-    }
-    return value
-  };
-};
-
-const tagsDeclarationList = [
+const tagsDeclarations = [
 ]
-
 
 module.exports = {
   meta: {
@@ -26,6 +7,7 @@ module.exports = {
       description: "Enforcing required tags by path in ata tests.",
       category: "acceptance-tests",
     },
+    fixable: "code",
     schema: [{
       type: "object",
       properties: {
@@ -51,6 +33,7 @@ module.exports = {
     }],
     type: "problem",
   },
+  getCollectedTagsDeclarations: () => tagsDeclarations,
   create: function (context) {
     return {
       Property(node) {
@@ -68,15 +51,13 @@ module.exports = {
           const { callee } = parent.parent
           const tags = elements.filter((element) => element.type === 'Literal').map(({ value }) => value)
 
-          tagsDeclarationList.push({
+          tagsDeclarations.push({
             tags,
             filename: context.getFilename(),
           })
 
           if (context.getFilename().endsWith('test.ts')) {
             const options = context.options[0]
-
-            console.log(options)
             if (!options) {
               throw Error('missing cofiguration')
             }
@@ -87,28 +68,33 @@ module.exports = {
                 requiredTagsPatterns.forEach((requiredTagPattern) => {
                   const requiredTags = requiredTagPattern.split('|')
                   if (!requiredTags.some((requiredTag) => tags.includes(requiredTag))) {
+                    let fix = undefined
+                    if (requiredTags.length === 1) {
+                      const [requiredTag] = requiredTags
+                      fix = (fixer) => {
+                        // Determine the insertion point and text format based on existing elements
+                        const lastElement = elements[elements.length - 1];
+                        const insertionText = elements.length > 0 ? `, '${requiredTag}'` : `'${requiredTag}'`;
+                        const insertionPoint = lastElement ? lastElement.range[1] : value.range[0] + 1; // Adjust for array start
+
+                        return fixer.insertTextAfterRange([insertionPoint - 1, insertionPoint], insertionText);
+                      }
+                    }
+
+
                     context.report({
                       node,
                       message: `Missing required tag: ${requiredTags.join(', ')}`,
+                      fix,
                     })
                   }
                 })
               }
             })
-
-            console.log(context.getFilename())
-            console.log('AAA', JSON.stringify(tags, getCircularReplacer(), 2))
           }
         }
 
       }
-      // NOTE: just for debugging
-      // Program(node) {
-        // if(context.getFilename().endsWith('test.ts')) {
-        //   console.log(context.getFilename())
-        //   console.log(JSON.stringify(node, getCircularReplacer(), 2))
-        // }
-      // }
     }
   }
 }
