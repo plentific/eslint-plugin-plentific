@@ -11,12 +11,15 @@ seed(
   },
 )
 
+const someValue = 'some value'
 
 test(
-  `Test title`,
+  `Test ${someValue} title`,
   {
-    // eslint-disable-next-line plentific/ata-required-tags
+    // eslint-disable-next-line plentific/ata-required-test-attributes
     tags: ['feature', 'foo', 'high'],
+    // eslint-disable-next-line plentific/ata-required-test-attributes
+    tcrIds: [],
   },
   async () => {
     // ...
