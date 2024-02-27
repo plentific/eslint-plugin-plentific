@@ -2,6 +2,7 @@ const { stringify, extractString } = require('../utils/nodeHelper')
 const { findProperty } = require('../utils/objectExpressionHelper')
 const { extractStringValues } = require ('../utils/arrayExpressionHelper')
 
+const stringifyTags = (tags) => `(${tags.join(',')})`
 
 const validateTags = (node, context) => {
   const { value } = node
@@ -17,8 +18,47 @@ const validateTags = (node, context) => {
   matchers.forEach(({ pathPattern, requiredTags: requiredTagsPatterns }) => {
     if (new RegExp(pathPattern).test(context.getFilename())) {
       requiredTagsPatterns.forEach((requiredTagPattern) => {
-        const requiredTags = requiredTagPattern.split('|')
-        if (!requiredTags.some((requiredTag) => tags.includes(requiredTag))) {
+        let requiredTags
+        let predicate
+
+        if(requiredTagPattern.includes('^')) {
+          requiredTags = requiredTagPattern.split('^')
+          predicate = (tags) => {
+            const presentTags = tags.filter((tag) => requiredTags.includes(tag))
+            return {
+              failure: presentTags.length !== 1,
+              message: (
+                presentTags.length > 1
+                  ? `Two many tags ${stringifyTags(presentTags)} but at most one required`
+                  : presentTags.length === 0
+                    ? `Missing required tag ${stringifyTags(requiredTags)}`
+                    : undefined
+              )
+            }
+          }
+        } else if(requiredTagPattern.includes('|')) {
+          requiredTags = requiredTagPattern.split('|')
+          predicate = (tags) => {
+            const presentTags = tags.filter((tag) => requiredTags.includes(tag))
+            return {
+              failure: presentTags.length < 1,
+              message: presentTags.length < 1 ? `Missing required tag ${stringifyTags(requiredTags)}` : undefined
+            }
+          }
+        } else {
+          requiredTags = [requiredTagPattern]
+          presentTags = tags.filter((tag) => requiredTags.includes(tag))
+          predicate = (tags) => {
+            return {
+              failure: presentTags.length < 1,
+              message: presentTags.length < 1 ? `Missing required tag ${stringifyTags(requiredTags)}` : undefined
+            }
+          }
+        }
+
+        const { failure, message } = predicate(tags)
+
+        if (failure) {
           let fix = undefined
           if (requiredTags.length === 1) {
             const [requiredTag] = requiredTags
@@ -33,7 +73,7 @@ const validateTags = (node, context) => {
           }
           context.report({
             node,
-            message: `Missing required tag: ${requiredTags.join(', ')}`,
+            message,
             fix,
           })
         }

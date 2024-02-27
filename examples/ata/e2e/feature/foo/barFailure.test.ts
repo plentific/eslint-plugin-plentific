@@ -25,3 +25,18 @@ test(
     // ...
   },
 )
+
+
+test(
+  `Test ${someValue} with two tags from the same category, but only one must be present`,
+  {
+    // eslint-disable-next-line plentific/ata-required-test-attributes
+    tags: ['feature', 'multi-a', 'foo', 'e2e', 'high', 'low'],
+    // eslint-disable-next-line plentific/ata-required-test-attributes
+    tcrIds: [],
+  },
+  async () => {
+    // ...
+  },
+)
+

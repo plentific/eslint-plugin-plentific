@@ -39,7 +39,11 @@ module.exports = {
       {
         matchers: [{
           pathPattern: '.*/ata/e2e/.*/.*\\.test\\.ts',
-          requiredTags: ['e2e', 'high|highest|medium|low'],
+          requiredTags: [
+            'e2e', // exactly one
+            'high^highest^medium^low', // at most one
+            'multi-a|multi-b|multi-c', // at least one
+          ],
         }]
       },
     ],
