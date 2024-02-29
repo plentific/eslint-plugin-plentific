@@ -40,3 +40,12 @@ To reverse this process, simply use `yarn unlink` or `yarn unlink eslint-plugin-
 
 Linting errors appears on fresh cloned project or code changes in linting rules files seem to not take an effect.
 * Remove `node_modules` and `run yarn`
+
+
+## Bumping the version 
+
+Once you finish your PR, don't forget bump the version in package.json, and also to reflect it in the lock file.
+```
+yarn upgrade eslint-plugin-plentific
+```
+

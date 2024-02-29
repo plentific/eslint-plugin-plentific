@@ -9,7 +9,13 @@ const noCyclicModulesImportsConfig = `
 module.exports = {
   extends: ["plugin:eslint-comments/recommended"],
   plugins: ["plentific"],
-
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: "module",
+  },
+  env: {
+    es6: true,
+  },
   rules: {
     "eslint-comments/disable-enable-pair": ["error", { allowWholeFile: true }],
     "eslint-comments/no-unused-disable": "error",
@@ -28,6 +34,19 @@ module.exports = {
     ],
     "plentific/no-trailing-slash": "error",
     "plentific/no-window-location-replace": "error",
+    "plentific/ata-required-test-attributes": [
+      "error",
+      {
+        matchers: [{
+          pathPattern: '.*/ata/e2e/.*/.*\\.test\\.ts',
+          requiredTags: [
+            'e2e', // exactly one
+            'high^highest^medium^low', // at most one
+            'multi-a|multi-b|multi-c', // at least one
+          ],
+        }]
+      },
+    ],
   },
 
   overrides: [
@@ -35,6 +54,7 @@ module.exports = {
       files: ["examples/**/*.js{x,}"],
       parser: "@babel/eslint-parser",
       parserOptions: {
+        ecmaVersion: 2018,
         ecmaFeatures: {
           jsx: true,
           legacyDecorators: true,
