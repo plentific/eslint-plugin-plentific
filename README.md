@@ -44,7 +44,7 @@ Linting errors appears on fresh cloned project or code changes in linting rules 
 
 ## Bumping the version 
 
-Once you finish your PR, don't forget bump the version in package.json, and also to reflect it in yarn.lock.
+Once you finish your PR, don't forget bump the version in package.json, and also to reflect it in the lock file.
 ```
 yarn upgrade eslint-plugin-plentific
 ```
