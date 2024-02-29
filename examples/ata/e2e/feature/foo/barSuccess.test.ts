@@ -4,7 +4,6 @@ seed(
   'Seed title',
   {
     tags: ['feature', 'foo'],
-
   },
   async () => {
     // ...
