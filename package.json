@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-plentific",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "main": "index.js",
   "author": "https://github.com/plentific/",
   "license": "UNLICENSED",
@@ -8,7 +8,8 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "eslint-utils": "^3.0.0"
+    "eslint-utils": "^3.0.0",
+    "jsx-ast-utils": "^3.3.5"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
