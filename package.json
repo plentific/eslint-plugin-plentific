@@ -8,7 +8,8 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "eslint-utils": "^3.0.0"
+    "eslint-utils": "^3.0.0",
+    "jsx-ast-utils": "^3.3.5"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",

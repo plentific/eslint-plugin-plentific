@@ -4,7 +4,12 @@ const noCyclicModulesImportsConfig = `
 [d]
 [e]
 [g] --> [f]
-`
+`;
+const enforceEslintMandatoryPropConfig = {
+  ComponentWithEslintMandatoryProp: {
+    eslintMandatoryProp: true,
+  },
+};
 
 module.exports = {
   extends: ["plugin:eslint-comments/recommended"],
@@ -32,19 +37,25 @@ module.exports = {
       "error",
       { config: noCyclicModulesImportsConfig },
     ],
+    "plentific/enforce-eslint-mandatory-prop": [
+      "error",
+      { config: enforceEslintMandatoryPropConfig },
+    ],
     "plentific/no-trailing-slash": "error",
     "plentific/no-window-location-replace": "error",
     "plentific/ata-required-test-attributes": [
       "error",
       {
-        matchers: [{
-          pathPattern: '.*/ata/e2e/.*/.*\\.test\\.ts',
-          requiredTags: [
-            'e2e', // exactly one
-            'high^highest^medium^low', // at most one
-            'multi-a|multi-b|multi-c', // at least one
-          ],
-        }]
+        matchers: [
+          {
+            pathPattern: ".*/ata/e2e/.*/.*\\.test\\.ts",
+            requiredTags: [
+              "e2e", // exactly one
+              "high^highest^medium^low", // at most one
+              "multi-a|multi-b|multi-c", // at least one
+            ],
+          },
+        ],
       },
     ],
   },
