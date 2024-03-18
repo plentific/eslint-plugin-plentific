@@ -8,6 +8,7 @@ const noCyclicModulesImportsConfig = `
 const enforceEslintMandatoryPropConfig = {
   ComponentWithEslintMandatoryProp: {
     eslintMandatoryProp: true,
+    otherEslintMandatoryProp: true,
   },
 };
 

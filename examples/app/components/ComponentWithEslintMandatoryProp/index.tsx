@@ -1,12 +1,14 @@
 interface Props {
   // This prop is optional in typescript, but specified as mandatory in eslint config. ESlint will throw an error if it's not provided to this component
-  eslintMandatoryProp?: string;
-  otherProp: string;
+  eslintMandatoryProp?: boolean;
+  otherEslintMandatoryProp?: boolean;
+  someMandatoryProp: boolean;
 }
 
 export const ComponentWithEslintMandatoryProp = ({
   eslintMandatoryProp,
-  otherProp,
+  otherEslintMandatoryProp,
+  someMandatoryProp,
 }: Props) => {
-  return `${eslintMandatoryProp} ${otherProp}`;
+  return `${eslintMandatoryProp} ${otherEslintMandatoryProp} ${someMandatoryProp}`;
 };

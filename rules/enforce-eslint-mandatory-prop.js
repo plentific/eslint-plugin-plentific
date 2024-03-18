@@ -1,36 +1,28 @@
-// @ts-enable
-const ESLint = require("eslint");
 const hasProp = require("jsx-ast-utils/hasProp");
 
 module.exports = {
-  /** @type {ESLint.Rule.RuleMetaData} */
+  /** @type {import('eslint').Rule.RuleMetaData} */
   meta: {
     type: "problem",
     docs: {
-      description:
-        "Prevent importing deprecated component based on a configurable list of restricted paths.",
+      description: "Enforce passing a mandatory prop to a component",
     },
-    schema: {
-      type: "array",
-      minItems: 1,
-      maxItems: 1,
-      items: [
-        {
+    schema: [
+      {
+        type: "object",
+        additionalProperties: {
           type: "object",
           additionalProperties: {
             type: "object",
             additionalProperties: {
-              type: "object",
-              additionalProperties: {
-                type: "boolean",
-              },
+              type: "boolean",
             },
           },
         },
-      ],
-    },
+      },
+    ],
   },
-  /** @type {ESLint.Rule.RuleModule['create']} */
+  /** @type {import('eslint').Rule.RuleModule['create']} */
   create: function (context) {
     const config = context.options[0].config;
 
