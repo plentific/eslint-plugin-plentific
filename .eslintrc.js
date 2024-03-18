@@ -38,7 +38,7 @@ module.exports = {
       "error",
       { config: noCyclicModulesImportsConfig },
     ],
-    "plentific/enforce-eslint-mandatory-prop": [
+    "plentific/enforce-mandatory-prop": [
       "error",
       { config: enforceEslintMandatoryPropConfig },
     ],

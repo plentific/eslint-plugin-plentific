@@ -1,28 +1,15 @@
+// @ts-check
 const hasProp = require("jsx-ast-utils/hasProp");
 
+/** @type {import('eslint').Rule.RuleModule} */
 module.exports = {
-  /** @type {import('eslint').Rule.RuleMetaData} */
   meta: {
     type: "problem",
     docs: {
-      description: "Enforce passing a mandatory prop to a component",
+      description:
+        "Enforce passing a mandatory prop to a component based on a configurable list of components and their mandatory props",
     },
-    schema: [
-      {
-        type: "object",
-        additionalProperties: {
-          type: "object",
-          additionalProperties: {
-            type: "object",
-            additionalProperties: {
-              type: "boolean",
-            },
-          },
-        },
-      },
-    ],
   },
-  /** @type {import('eslint').Rule.RuleModule['create']} */
   create: function (context) {
     const config = context.options[0].config;
 

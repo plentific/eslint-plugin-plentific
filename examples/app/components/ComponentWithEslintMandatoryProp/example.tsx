@@ -1,6 +1,6 @@
 import { ComponentWithEslintMandatoryProp } from "examples/app/components/ComponentWithEslintMandatoryProp";
 
-export const Usage = () => {
+export const Example = () => {
   return (
     <>
       <ComponentWithEslintMandatoryProp
@@ -9,10 +9,10 @@ export const Usage = () => {
         otherEslintMandatoryProp
       />
       {/* This component is missing both `eslintMandatoryProp` and `otherEslintMandatoryProp` and should show two eslint errors */}
-      {/* eslint-disable-next-line plentific/enforce-eslint-mandatory-prop */}
+      {/* eslint-disable-next-line plentific/enforce-mandatory-prop */}
       <ComponentWithEslintMandatoryProp someMandatoryProp />
       {/* This component is missing `otherEslintMandatoryProp` and should show an eslint error */}
-      {/* eslint-disable-next-line plentific/enforce-eslint-mandatory-prop */}
+      {/* eslint-disable-next-line plentific/enforce-mandatory-prop */}
       <ComponentWithEslintMandatoryProp someMandatoryProp eslintMandatoryProp />
     </>
   );
