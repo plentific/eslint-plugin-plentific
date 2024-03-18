@@ -21,7 +21,7 @@ module.exports = {
     ],
   },
   create: function (context) {
-    const config = context.options[0].config;
+    const config = context.options[0];
 
     return {
       JSXElement(node) {
