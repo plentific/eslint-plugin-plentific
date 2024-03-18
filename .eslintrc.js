@@ -38,10 +38,7 @@ module.exports = {
       "error",
       { config: noCyclicModulesImportsConfig },
     ],
-    "plentific/enforce-optional-prop": [
-      "error",
-      { config: enforceOptionalPropConfig },
-    ],
+    "plentific/enforce-optional-prop": ["error", enforceOptionalPropConfig],
     "plentific/no-trailing-slash": "error",
     "plentific/no-window-location-replace": "error",
     "plentific/ata-required-test-attributes": [

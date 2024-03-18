@@ -10,14 +10,11 @@ module.exports = {
     },
     schema: [
       {
-        type: "object",
+        type: "object", // Configuration object
         additionalProperties: {
-          type: "object",
+          type: "object", // Component name
           additionalProperties: {
-            type: "object",
-            additionalProperties: {
-              type: "boolean",
-            },
+            type: "boolean", // Prop name
           },
         },
       },
