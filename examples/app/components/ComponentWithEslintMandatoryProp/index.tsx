@@ -1,5 +1,5 @@
 interface Props {
-  // This prop is optional in typescript, but specified as mandatory in eslint config. ESlint will throw an error if it's not provided to this component
+  // These two props are optional in typescript, but specified as mandatory in eslint config. ESlint will throw an error if at least one of those is not provided to this component
   eslintMandatoryProp?: boolean;
   otherEslintMandatoryProp?: boolean;
   someMandatoryProp: boolean;
