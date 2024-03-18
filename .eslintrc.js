@@ -5,7 +5,7 @@ const noCyclicModulesImportsConfig = `
 [e]
 [g] --> [f]
 `;
-const enforceEslintMandatoryPropConfig = {
+const enforceOptionalPropConfig = {
   ComponentWithEslintMandatoryProp: {
     eslintMandatoryProp: true,
     otherEslintMandatoryProp: true,
@@ -40,7 +40,7 @@ module.exports = {
     ],
     "plentific/enforce-optional-prop": [
       "error",
-      { config: enforceEslintMandatoryPropConfig },
+      { config: enforceOptionalPropConfig },
     ],
     "plentific/no-trailing-slash": "error",
     "plentific/no-window-location-replace": "error",
