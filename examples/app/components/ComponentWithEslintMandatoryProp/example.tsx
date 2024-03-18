@@ -9,10 +9,10 @@ export const Example = () => {
         otherEslintMandatoryProp
       />
       {/* This component is missing both `eslintMandatoryProp` and `otherEslintMandatoryProp` and should show two eslint errors */}
-      {/* eslint-disable-next-line plentific/enforce-mandatory-prop */}
+      {/* eslint-disable-next-line plentific/enforce-optional-prop */}
       <ComponentWithEslintMandatoryProp someMandatoryProp />
       {/* This component is missing `otherEslintMandatoryProp` and should show an eslint error */}
-      {/* eslint-disable-next-line plentific/enforce-mandatory-prop */}
+      {/* eslint-disable-next-line plentific/enforce-optional-prop */}
       <ComponentWithEslintMandatoryProp someMandatoryProp eslintMandatoryProp />
     </>
   );

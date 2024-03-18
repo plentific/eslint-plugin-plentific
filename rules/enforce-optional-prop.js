@@ -6,9 +6,22 @@ module.exports = {
   meta: {
     type: "problem",
     docs: {
-      description:
-        "Enforce passing a mandatory prop to a component based on a configurable list of components and their mandatory props",
+      description: "Enforce passing a prop to a component based on config",
     },
+    schema: [
+      {
+        type: "object",
+        additionalProperties: {
+          type: "object",
+          additionalProperties: {
+            type: "object",
+            additionalProperties: {
+              type: "boolean",
+            },
+          },
+        },
+      },
+    ],
   },
   create: function (context) {
     const config = context.options[0].config;

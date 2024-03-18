@@ -6,7 +6,7 @@ module.exports = {
     "no-concurrent-async": require("./rules/no-concurrent-async"),
     "no-deprecated-components": require("./rules/no-deprecated-components"),
     "no-cyclic-modules-imports": require("./rules/no-cyclic-modules-imports"),
-    "enforce-mandatory-prop": require("./rules/enforce-mandatory-prop"),
+    "enforce-optional-prop": require("./rules/enforce-optional-prop"),
     "no-trailing-slash": require("./rules/no-trailing-slash"),
     "no-window-location-replace": require("./rules/no-window-location-replace"),
   },
